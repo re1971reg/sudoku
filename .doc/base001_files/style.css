@@ -1,0 +1,652 @@
+/* Show it is fixed to the top */
+body {
+	min-height: 50rem;
+	padding-top: 3.5rem;
+}
+/* minimize width for .container */
+@media (min-width: 1400px) {
+	.container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+		max-width: 1140px;
+	}
+}
+
+@font-face {
+    font-family: SofiaSans;
+    src: url(./SofiaSans.ttf);
+	font-display: swap;
+}
+
+/*
+@font-face {
+    font-family: PTSans;
+    src: url(./PTSans-Regular.ttf);
+}
+*/
+
+/* breadcrumbs */
+.breadcrumb-item+.breadcrumb-item::before {
+	--bs-breadcrumb-divider: '›'
+}
+
+/* GAME CONTAINER */
+
+.game_container {
+	margin: 0 auto;
+	padding: 20px 0px;
+	width: 100%;
+}
+
+.stats {
+	width: 100%;
+	display: block;
+	margin-bottom: 20px;
+}
+
+.statistics {
+    text-align: center;
+	font-size: 26px;
+}
+
+.game_left {
+	width: 60%;
+	float: left;
+	min-height: 1px;
+}
+
+.game_right {
+	width: 40%;
+	float: left;
+}
+
+#sudoku_container {
+	padding: 0px 30px 0px 0px;
+}
+
+#sudoku_console {
+	padding: 0px 0px;
+}
+
+
+@media (max-width: 991px){
+
+	.game_container {
+		width: 100%;
+		padding: 10px 0px 0px 0px;
+	}
+
+	.stats {
+		margin-bottom: 10px;
+	}
+
+	.game_left {
+		width: 100%;
+		clear: both;
+	}	
+
+	.game_right {
+		width: 100%;
+		clear: both;
+		margin-top: 30px;
+	}
+	
+	#sudoku_container {
+		padding: 0px;
+	}	
+}
+
+#pause img {
+	margin: 0;
+	vertical-align: text-bottom;
+	cursor: pointer;
+}
+
+.nav-link.disabled {
+	color: #ffffff;
+}
+
+
+
+/* board */
+.sudoku_board {
+    margin: 0 auto;
+	border: 2px solid #000000;
+    overflow: hidden;
+	height: 100%;
+    
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+}
+
+.sudoku_board .cell {
+	width: calc(100%/9);
+	/*display: flex;*/
+	/*flex-direction: column;*/
+    /*display: inline-block;    */
+    /*float:left;*/
+    cursor:pointer;    
+    text-align: center;
+    overflow: hidden;
+	aspect-ratio: 1/1;
+    
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	    box-sizing: border-box;
+    
+    box-shadow: 0 0 0 1px #bdc3c7;
+    background: #fff;
+	font-family: SofiaSans, sans-serif;
+	
+}
+
+.sudoku_board .cell.border_h {
+    box-shadow: 0px 0px 0px 1px #bdc3c7, inset 0px -2px 0 0 #34495e;    
+}
+
+.sudoku_board .cell.border_v {
+    box-shadow: 0px 0px 0px 1px #bdc3c7, inset -2px 0 0 #34495e;
+}
+
+.sudoku_board .cell.border_h.border_v {
+    box-shadow: 0px 0px 0px 1px #bdc3c7, inset -2px 0 0 black, inset 0px -2px 0 black;
+}
+
+.sudoku_board .cell span {
+    color: #0b469d;
+    font-size: 36px;
+    text-align: center;
+	/*width: 100%;*/
+	/*height: 100%;*/
+}
+
+.sudoku_board .cell.selected, 
+.sudoku_board .cell.selected.fix {
+    background: #FFE;
+}
+
+.sudoku_board .cell.selected.current {
+    /*position:relative;*/
+    background: #3498db; /*#3498db;  #0b469d; */
+    font-weight:bold;
+    /*box-shadow: 0px 0px 3px 3px #bdc3c7;*/
+}
+
+.sudoku_board .cell.selected.current span {
+    color: #fff;
+}
+
+.sudoku_board .cell.selected.group {
+    color:blue;    
+}
+
+.sudoku_board .cell span.samevalue, .sudoku_board .cell.fix span.samevalue {
+    font-weight:bold;  
+    color:#3498db;
+}
+
+.sudoku_board .cell.notvalid, 
+.sudoku_board .cell.selected.notvalid {
+    font-weight:bold;
+    color:white;;
+    background:#e74c3c;
+}
+
+.sudoku_board .cell.fix {
+    background:#f9f9f9;
+    cursor:not-allowed;
+}
+
+.sudoku_board .cell.fix span {
+  color: #000000; /* #7f8c8d */
+}
+
+.sudoku_board .cell .solution {
+  font-size:10px;
+  color:#d35400;
+}
+
+.sudoku_board .cell .note {
+    color: #999999; /*#bdc3c7;*/
+    width:50%;    
+    height:50%;
+    display: inline-block;    
+    float:left;
+    text-align:center;
+    font-size:14px;
+  
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.sudoku_board .cell .note.samevalue{
+	font-weight:bold;
+	color:#3498db;
+}
+
+.sudoku_board .current .note{
+	color: #f1f1f1;
+	font-weight: bold;
+}
+
+.fornotes {
+	width: 100%;
+	height: 100%;
+	font-size:14px;
+	color:#bdc3c7;
+}
+
+.fornotes td {
+	width: 33.3%;
+	height: 33.3%;
+}
+
+.sudoku_board .cell .fornotes .note {
+    float: none;
+	display: inherit;
+}
+
+
+.gameover_container {
+    position: relative;
+	width:100%;
+	height: 740px;
+	margin-top: -80px;
+	background: #00000090;
+}
+
+.gameover_container .gameover {
+    font-weight:bold;
+	text-align:center;    
+    display:block;
+    position:absolute;
+	top: 30%;
+	left: 25%;
+	width: 50%;    
+    padding: 20px 10px;
+	background-color: #ffffff;
+	/*border: 1px solid #555555;*/
+	border-radius: 10px;
+}
+
+.gameover h3{
+	margin-bottom: 20px;
+}
+
+.restart {
+	background: #0b469d;
+	color: #ffffff;
+	padding: 10px 20px;
+	cursor: pointer;
+	/*margin: 5px 0px 0px 0px;*/
+	display: inline-block;
+	font-weight: 500;
+}
+
+a.restart, 
+a.restart:hover {
+	color: #f1f1f1;
+	text-decoration: none;
+}
+
+.continue {
+	background: #ff6200; /*#287e00;*/
+	padding: 15px 20px;
+}
+
+.start_new_game {
+	background: #4a4a4a;
+}
+
+/* CONSOLE - ЦИФРЫ */
+.board_console_container,
+.gameover_container {
+
+}
+
+.board_console {     
+    color: #fff;
+}
+
+.board_console .num,
+.board_console_elements .num {
+    color: #2c3e50;
+	border-radius: 6px;
+    padding: 0px;	
+    /*display: inline-block;    */
+    /*font-weight: 700;*/    
+    text-align: center;    
+    cursor: pointer;
+   
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;
+    
+    box-shadow: 0px 0px 0px 1px #bdc3c7;
+}
+
+.board_console_elements .hint {
+	position: relative;
+}
+
+.board_console .num {
+	width: 31.33%;
+	/*margin-right: 2%;*/
+	margin-bottom: 12px;
+	background-color: #eaeef4;
+	padding: 9px 0px;
+	font-family: SofiaSans;
+	font-size: 40px;
+}
+
+.board_console .num:hover {
+    color:white;
+    background:#f1c40f;
+}
+
+.board_console .num.selected {
+    background:#f1c40f;
+    box-shadow: 0px 0px 3px 3px #bdc3c7;
+}
+
+.board_console .num.no:hover {
+    color:white;
+    cursor:not-allowed;
+}
+
+.board_console .num.disabled{
+	opacity: 0.25;
+}
+
+
+/* CONSOLE ELEMENTS - КНОПКИ УПРАВЛЕНИЯ */
+
+.board_console_elements {
+	margin-bottom: 20px;
+}
+
+.blue_color {
+	background-color: #0b469d;
+	border-color: #0b469d;
+}
+
+.board_console_elements .num {
+	width:31.33%;
+	/*margin-right: 2%;*/
+	padding: 10px 0px;
+	background-color: #0b469d;
+	color: #ffffff;
+	font-size: 16px;
+}
+
+.board_console_elements .num img {
+	max-width: 50px;
+	display: block;
+	margin: 0 auto;
+}
+/*
+.board_console_elements .num:last-child {
+	width:25%;
+	margin-right: 0%;
+}*/
+
+@media (max-width: 575px){
+	.board_console_elements .num {
+		font-size: 20px;
+	}
+	.board_console_elements .num img {
+		max-width: 30px;
+	}	
+}
+
+.board_console_elements .undo:hover {
+    background: grey;
+	color: #f1c40f;
+}
+
+.board_console_elements .note {
+	/*background:#95a5a6;
+    color:#ecf0f1;*/
+}
+
+.board_console_elements .note:hover {
+    background:#95a5a6;
+    color:#f1c40f;
+}
+
+.board_console_elements .hint:hover {
+    background: green;
+	color: #f1c40f;
+}
+
+.board_console_elements .num.note.selected {
+    background:#f1c40f;  
+    box-shadow: 0px 0px 3px 3px #bdc3c7;
+}
+
+.board_console_elements .num.note.selected:hover {
+  color:white;
+}
+
+.board_console_elements .num.remove:hover {
+    color:white;
+    background:#c0392b;
+}
+
+
+#sudoku_menu {
+    background-color: black;
+    position: absolute;
+    z-index:2;
+    width: 100%;
+    height: 100%;
+    left: -100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+#sudoku_menu ul {
+   margin: 0;
+   padding: 100px 0px 0px 0px;
+   list-style: none;
+}
+
+#sudoku_menu ul li{
+  margin: 0px 50px;
+}
+
+#sudoku_menu ul li a {
+  text-align:center;
+  padding: 15px 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #2c3e50;
+}
+
+#sudoku_menu.open-sidebar {
+  left:0px;
+}
+
+#sidebar-toggle {
+    z-index:3;
+    background: #bdc3c7;
+    border-radius: 3px;
+    display: block;
+    position: relative;
+    padding: 22px 18px;
+    float: left;
+}
+
+#sidebar-toggle .bar{
+    display: block;
+    width: 28px;
+    margin-bottom: 4px;
+    height: 4px;
+    background-color: #f0f0f0;
+    border-radius: 1px;   
+}
+
+#sidebar-toggle .bar:last-child{
+     margin-bottom: 0;   
+}
+
+.game-debug {
+	padding: 20px;
+	background: #ccc;
+	border: solid 2px #999;
+	margin-bottom: 30px;
+}
+
+/*Responsive Stuff*/
+@media (max-width: 1199px) {
+	.gameover_container {
+		height: 600px;
+		margin-top: -65px;
+	}
+}
+
+@media (max-width: 991px) {
+	.sudoku_board .cell span { font-size: 30px; }
+	
+	.board_console_elements .num {
+		margin-right: 1.25%;
+		margin-left: 1.25%;
+	}
+	.board_console_elements .num:first-child {
+		margin-left: 0.5%;
+	}
+	.board_console_elements .num:last-child {
+		margin-right: 0.5%;
+	}	
+	
+	.board_console .num	{
+		width: 10.11%; 
+		margin-right: 0.5%; 
+		margin-left: 0.5%;
+		padding: 9px 0px;
+	}	
+	.statistics	{font-size: 20px;}
+
+	#pause img {
+		max-width: 24px;
+	}
+
+	.gameover_container {
+		height: 1000px;
+		margin-top: -55px;
+	}
+}
+
+@media (max-width: 767px) {
+	.statistics	{font-size: 15px;}
+
+	#pause img {
+		max-width: 20px;
+	}
+
+	.board_console .num	{font-size: 22px;}
+	.gameover_container {
+		height: 790px;
+		margin-top: -45px;
+	}
+	.gameover_container .gameover {
+		display:block;
+		position:absolute;
+		top: 30%;
+		left: 10%;
+		width: 80%;    
+	}
+	.game_right {
+		margin-top: 10px;
+	}
+	.board_console_elements {
+		margin-bottom: 10px;
+	}
+	.board_console_elements .num img {
+		max-width: 35px;
+	}	
+}
+
+@media (max-width: 640px){
+	.sudoku_board .cell span { font-size:24px; }
+	.sudoku_board .cell .note { font-size:10px; line-height: 10px; }
+}
+
+@media (max-width: 550px) {
+	.statistics	{font-size: 12px;}
+	#pause img {max-width: 16px;}
+
+	.sudoku_board .cell span { font-size: 24px; }
+	.gameover_container {
+		height: 760px;
+		margin-top: -40px;
+	}
+}
+
+@media (max-width: 470px){
+	.sudoku_board .cell span { font-size: 20px; }
+	/*.sudoku_board .cell .note { font-size: 8px; }*/
+	.board_console_elements .num { font-size: 16px; }
+	.gameover_container {
+		height: 670px;
+		margin-top: -45px;
+	}	
+}
+
+@media (max-width: 425px){
+	.statistics	{font-size: 12px;}
+}
+
+@media (max-width: 400px){
+	.navbar-brand {font-size: 17px;}
+	.navbar .btn {padding: 4px 8px;}
+	.navbar-toggler {padding: 2px 4px; }
+
+	.game_container {padding-top: 5px;}
+
+	.gameover_container {
+		height: 620px;
+		margin-top: -60px;
+	}
+	.statistics	{font-size: 11px;}
+
+	.board_console_elements .num { font-size: 13px; }
+
+	.card-text{font-size: 14px;}
+	.card-body{padding: 10px;}
+}
+
+@media (max-width: 375px){
+	.statistics	{font-size: 10px;}
+	.card-text{font-size: 13px;}
+	.card-body{padding: 10px;}
+}
+
+@media (max-width: 320px){
+	.navbar-brand {font-size: 14px;}
+	.navbar .btn {padding: 3px 6px; font-size: 12px;}
+	.navbar-toggler {padding: 2px 4px; }
+	.navbar-toggler-icon {width: 26px; height: 26px;}
+
+	.game_container {padding-top: 0px;}
+
+	.sudoku_board .cell span { font-size: 16px; }
+	.sudoku_board .cell .note { font-size: 9px; line-height: 9px;}
+	.board_console_elements .num { font-size: 11px; }
+
+	.statistics	{font-size: 9px;}
+	#pause img {max-width: 14px;}
+	.gift-hint {max-width: 24px; max-height: 24px;}
+
+	.card-text{font-size: 11px;}
+	.card-body{padding: 9px;}
+}
+
+@media (max-width: 240px){
+	.statistics	{font-size: 8px;}
+	.sudoku_board .cell span { font-size: 10px; }   
+}
